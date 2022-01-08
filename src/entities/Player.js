@@ -19,6 +19,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setGravityY(500)
         this.setCollideWorldBounds(true)
+
+        this.scene.anims.create({
+            key: 'run',
+            frames: this.scene.anims.generateFrameNames('player', {start: 11, end: 16}),
+            frameRate: 8,
+            repeat: -1
+        })
     }
 
     initEvents() {
@@ -39,6 +46,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (space.isDown) {
             this.setVelocityY(-this.speed)
         }
+
+        this.play('run', true)
     }
 }
 

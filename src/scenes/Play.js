@@ -38,6 +38,10 @@ class Play extends Phaser.Scene {
         return new Player(this, 100, 250)
     }
 
+    update(){
+        
+    }
+
 }
 
 
