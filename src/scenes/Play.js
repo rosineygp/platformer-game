@@ -20,6 +20,7 @@ class Play extends Phaser.Scene {
             }
         })
 
+        this.createEnfOfLevel(playerZones.end)
         this.setupFollowUpCameraOn(player)
 
     }
@@ -66,6 +67,13 @@ class Play extends Phaser.Scene {
             start: playerZones.find(zone => zone.name === 'startZone'),
             end: playerZones.find(zone => zone.name === 'endZone')
         }
+    }
+
+    createEnfOfLevel(end) {
+        this.physics.add.sprite(end.x, end.y, 'end')
+            .setAlpha(0)
+            .setSize(5, this.config.height)
+            .setOrigin(0)
     }
 
 }
