@@ -29,6 +29,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true)
         this.setOrigin(0.5, 1)
 
+        this.body.setSize(20, 36)
+
         initAnimations(this.scene.anims)
     }
 
