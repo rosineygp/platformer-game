@@ -9,7 +9,8 @@ const HEIGHT = 600
 const SHARED_CONFIG = {
   width: WIDTH,
   height: HEIGHT,
-  mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0
+  mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
+  zoomFactor: 1.5
 }
 
 const Scenes = [
