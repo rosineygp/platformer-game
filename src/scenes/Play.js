@@ -33,10 +33,13 @@ class Play extends Phaser.Scene {
         const tileset = map.getTileset('main_lev_build_1')
 
         const platformsColliders = map.createStaticLayer('platforms_colliders', tileset)
-        platformsColliders.setCollisionByProperty({ collides: true }, true)
-
         const platforms = map.createStaticLayer('platforms', tileset)
         const environment = map.createStaticLayer('environment', tileset)
+        const playerZone = map.getObjectLayer('player_zones').objects
+
+        debugger
+
+        platformsColliders.setCollisionByProperty({ collides: true }, true)
 
         return { platforms, environment, platformsColliders }
     }
@@ -51,7 +54,7 @@ class Play extends Phaser.Scene {
 
     setupFollowUpCameraOn(player) {
         const { width, height, mapOffset, zoomFactor } = this.config
-        this.physics.world.setBounds(0, -200, width + mapOffset, height + 200)
+        this.physics.world.setBounds(0, -200, width + mapOffset, height + 400)
         this.cameras.main.setBounds(0, 0, width + mapOffset, height).setZoom(zoomFactor)
         this.cameras.main.startFollow(player)
     }
