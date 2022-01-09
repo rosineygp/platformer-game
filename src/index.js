@@ -2,16 +2,14 @@ import Phaser, { Scale } from "phaser";
 import PreloadScene from "./scenes/Preload"
 import PlayScene from "./scenes/Play"
 
-const WIDTH = 1280
+const MAP_WIDTH = 1600
+const WIDTH = document.body.offsetWidth
 const HEIGHT = 600
-const BIRD_POSITION = {
-  x: HEIGHT * 0.1,
-  y: HEIGHT / 2
-}
+
 const SHARED_CONFIG = {
   width: WIDTH,
   height: HEIGHT,
-  startPosition: BIRD_POSITION
+  mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0
 }
 
 const Scenes = [
@@ -25,10 +23,6 @@ const config = {
   type: Phaser.AUTO,
   ...SHARED_CONFIG,
   pixelArt: true,
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  },
   physics: {
     default: 'arcade',
     arcade: {
