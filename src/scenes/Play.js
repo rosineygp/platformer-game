@@ -17,13 +17,14 @@ class Play extends Phaser.Scene {
 
         this.createPlayerColliders(player, {
             colliders: {
-                platformsColliders: layers.platformsColliders
+                platformsColliders: layers.platformsColliders,
             }
         })
 
-        this.createPlayerColliders(enemy, {
+        this.createEnemyColliders(enemy, {
             colliders: {
-                platformsColliders: layers.platformsColliders
+                platformsColliders: layers.platformsColliders,
+                player
             }
         })
 
@@ -60,12 +61,14 @@ class Play extends Phaser.Scene {
         player.addCollider(colliders.platformsColliders)
     }
 
-    createEnemy(start){
-        return new Birdman(this, 100, 200)
+    createEnemy(start) {
+        return new Birdman(this, 150, 380)
     }
 
     createEnemyColliders(enemy, { colliders }) {
-        enemy.addCollider(colliders.platformsColliders)
+        enemy
+            .addCollider(colliders.platformsColliders)
+            .addCollider(colliders.player)
     }
 
     setupFollowUpCameraOn(player) {
