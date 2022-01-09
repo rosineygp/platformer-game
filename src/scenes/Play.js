@@ -12,7 +12,11 @@ class Play extends Phaser.Scene {
 
         const player = this.createPlayer()
 
-        player.addCollider(layers.platformColliders)
+        this.createPlayerColliders(player, {
+            colliders: {
+                platformsColliders: layers.platformsColliders
+            }
+        })
 
     }
 
@@ -25,21 +29,21 @@ class Play extends Phaser.Scene {
     createLayers(map) {
         const tileset = map.getTileset('main_lev_build_1')
 
-        const platformColliders = map.createStaticLayer('platforms_colliders', tileset)
-        platformColliders.setCollisionByProperty({collides: true}, true)
-        
+        const platformsColliders = map.createStaticLayer('platforms_colliders', tileset)
+        platformsColliders.setCollisionByProperty({ collides: true }, true)
+
         const platforms = map.createStaticLayer('platforms', tileset)
         const environment = map.createStaticLayer('environment', tileset)
-        
-        return { platforms, environment, platformColliders }
+
+        return { platforms, environment, platformsColliders }
     }
 
     createPlayer() {
         return new Player(this, 100, 250)
     }
 
-    update(){
-        
+    createPlayerColliders(player, { colliders }) {
+        player.addCollider(colliders.platformsColliders)
     }
 
 }
