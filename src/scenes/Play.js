@@ -39,20 +39,23 @@ class Play extends Phaser.Scene {
         this.input.on('pointerdown', this.startDrawing, this)
         this.input.on('pointerup', this.finishDrawing, this)
 
+        this.plotting = false
+
 
     }
 
     startDrawing(pointer) {
-        console.log('startDrawing')
+        this.plotting = true
         this.line.x1 = pointer.worldX
         this.line.y1 = pointer.worldY
     }
 
     finishDrawing(pointer) {
-        console.log('finishDrawing')
+        this.plotting = false
         this.line.x2 = pointer.worldX
         this.line.y2 = pointer.worldY
 
+        this.graphics.clear()
         this.graphics.strokeLineShape(this.line)
     }
 
@@ -131,6 +134,19 @@ class Play extends Phaser.Scene {
             eolOverlap.active = false
             console.log('won!')
         })
+    }
+
+    update() {
+
+        if (this.plotting){
+            const pointer = this.input.activePointer
+
+            this.line.x2 = pointer.worldX
+            this.line.y2 = pointer.worldY
+            this.graphics.clear()
+
+            this.graphics.strokeLineShape(this.line)
+        }
     }
 
 }
