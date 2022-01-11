@@ -30,6 +30,30 @@ class Play extends Phaser.Scene {
         this.createEnfOfLevel(playerZones.end, player)
         this.setupFollowUpCameraOn(player)
 
+
+        this.graphics = this.add.graphics()
+
+        this.line = new Phaser.Geom.Line()
+        this.graphics.lineStyle(1, 0x00ff00)
+
+        this.input.on('pointerdown', this.startDrawing, this)
+        this.input.on('pointerup', this.finishDrawing, this)
+
+
+    }
+
+    startDrawing(pointer) {
+        console.log('startDrawing')
+        this.line.x1 = pointer.worldX
+        this.line.y1 = pointer.worldY
+    }
+
+    finishDrawing(pointer) {
+        console.log('finishDrawing')
+        this.line.x2 = pointer.worldX
+        this.line.y2 = pointer.worldY
+
+        this.graphics.strokeLineShape(this.line)
     }
 
     createMap() {
