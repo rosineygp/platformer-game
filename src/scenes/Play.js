@@ -37,7 +37,7 @@ class Play extends Phaser.Scene {
         this.graphics.lineStyle(1, 0x00ff00)
 
         this.input.on('pointerdown', this.startDrawing, this)
-        this.input.on('pointerup', this.finishDrawing, this)
+        this.input.on('pointerup', (pointer) => this.finishDrawing(pointer, layers.platforms), this)
 
         this.plotting = false
 
@@ -50,12 +50,22 @@ class Play extends Phaser.Scene {
         this.line.y1 = pointer.worldY
     }
 
-    finishDrawing(pointer) {
+    finishDrawing(pointer, layer) {
         this.plotting = false
         this.line.x2 = pointer.worldX
         this.line.y2 = pointer.worldY
 
         this.graphics.clear()
+
+        this.tileHits = layer.getTilesWithinShape(this.line)
+
+        if (this.tileHits.length > 0) {
+            this.tileHits.forEach(tile => {
+                if (tile.index !== -1) {
+                    console.log('hit hit hit')
+                }
+            })
+        }
         this.graphics.strokeLineShape(this.line)
     }
 
