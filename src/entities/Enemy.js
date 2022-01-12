@@ -32,6 +32,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.setSize(20, 45)
         this.setOffset(7, 20)
 
+        this.platformsCollidersLayer = null
+
     }
 
     initEvents() {
@@ -40,15 +42,25 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     update(time, delta) {
         this.setVelocityX(30)
-        const { ray } = this.raycast(this.body)
+        const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer)
+
+        if (hasHit) {
+            console.log('hit platform')
+        }
 
         this.rayGraphics.clear()
         this.rayGraphics.strokeLineShape(ray)
     }
 
-    raycast(body, raylength = 30) {
+    setPlatformsColliders(platformsCollidersLayer){
+        this.platformsCollidersLayer = platformsCollidersLayer
+    }
+
+    raycast(body, layer, raylength = 30) {
         const { x, y, width, halfHeight } = body
         const line = new Phaser.Geom.Line()
+
+        let hasHit = false
 
         line.x1 = x + width
         line.y1 = y + halfHeight
@@ -56,9 +68,17 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         line.x2 = line.x1 + raylength
         line.y2 = line.y1 + raylength
 
-        return { ray: line }
+        const hits = layer.getTilesWithinShape(line)
+
+        if (hits.length > 0) {
+            hasHit = hits.some(hit => hit.init !== -1)
+        }
+
+        return { ray: line, hasHit }
 
     }
+
+
 
 }
 
