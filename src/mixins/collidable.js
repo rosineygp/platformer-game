@@ -1,3 +1,5 @@
+import Phaser from "phaser"
+
 export default {
     addCollider(otherGameObject, callback) {
         this.scene.physics.add.collider(this, otherGameObject, callback, null, this)
@@ -22,16 +24,34 @@ export default {
 
         let hasHit = false
 
-        line.x1 = x + width
-        line.y1 = y + halfHeight
+        switch(body.facing) {
+            case Phaser.Physics.Arcade.FACING_RIGHT: {
 
-        line.x2 = line.x1 + raylength
-        line.y2 = line.y1 + raylength
+                line.x1 = x + width
+                line.y1 = y + halfHeight
+                line.x2 = line.x1 + raylength
+                line.y2 = line.y1 + raylength
+
+                break
+            }
+            case Phaser.Physics.Arcade.FACING_LEFT: {
+
+                line.x1 = x
+                line.y1 = y + halfHeight
+                line.x2 = line.x1 - raylength
+                line.y2 = line.y1 + raylength
+
+                break
+            }
+        }
+
+
 
         const hits = layer.getTilesWithinShape(line)
 
         if (hits.length > 0) {
-            hasHit = this.prevHasHit = hits.some(hit => hit.init !== -1)
+
+            hasHit = this.prevHasHit = hits.some(hit => hit.index !== -1)
         }
 
         this.prevRay = line
