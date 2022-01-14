@@ -17,6 +17,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     init() {
         this.gravity = 500
         this.speed = 50
+        this.timeFromLastTurn = 0
         this.platformsCollidersLayer = null
         this.rayGraphics = this.scene.add.graphics({
             lineStyle: {
@@ -44,11 +45,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         // this.setVelocityX(30)
         const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer, 30, 1)
 
-        console.log(hasHit)
-
-        if (!hasHit) {
+        if (!hasHit && this.timeFromLastTurn + 100 < time) {
             this.setFlipX(!this.flipX)
             this.setVelocityX(this.speed = -this.speed)
+            this.timeFromLastTurn = time
         }
 
         this.rayGraphics.clear()
