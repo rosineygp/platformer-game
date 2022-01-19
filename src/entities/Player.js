@@ -24,6 +24,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.jumpCount = 0
         this.consecutiveJumps = 1
+        this.hasBeenHit = false
+        this.bounceVelocity = 250
 
         this.body.setGravityY(500)
         this.setCollideWorldBounds(true)
@@ -39,6 +41,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+        if (this.hasBeenHit) {
+            return
+        }
+
         const { left, right, space } = this.cursors
         const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space)
 
@@ -70,9 +76,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.play('jump', true)
     }
 
+    bounceOff() {
+        this.body.touching.right ? 
+            this.setVelocity(-this.bounceVelocity, -this.bounceVelocity) :
+            this.setVelocity(this.bounceVelocity, -this.bounceVelocity)
+    }
+
     takesHit(initiator){
-        console.log('player takes hit')
-        console.log(initiator)
+        // console.log('player takes hit')
+        // console.log(initiator)
+        this.hasBeenHit = true
+        this.bounceOff()
     }
 
 
