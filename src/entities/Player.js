@@ -70,6 +70,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.play('jump', true)
     }
 
+    takesHit(initiator){
+        console.log('player takes hit')
+        console.log(initiator)
+    }
+
 
 }
 

@@ -97,10 +97,14 @@ class Play extends Phaser.Scene {
         return enemies
     }
 
+    onPlayerCollision(enemy, player) {
+        player.takesHit(enemy)
+    }
+
     createEnemyColliders(enemies, { colliders }) {
         enemies
             .addCollider(colliders.platformsColliders)
-            .addCollider(colliders.player)
+            .addCollider(colliders.player, this.onPlayerCollision)
         
     }
 
