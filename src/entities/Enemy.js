@@ -7,6 +7,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this)
         scene.physics.add.existing(this)
+        this.config = scene.config
 
         Object.assign(this, collidable)
 
@@ -70,8 +71,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
             this.currentPatrolDistance = 0
         }
 
-        this.rayGraphics.clear()
-        this.rayGraphics.strokeLineShape(ray)
+        if (this.config.debug && ray) {
+            this.rayGraphics.clear()
+            this.rayGraphics.strokeLineShape(ray)
+        }
     }
 
     setPlatformsColliders(platformsCollidersLayer) {

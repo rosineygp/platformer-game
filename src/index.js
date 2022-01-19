@@ -10,7 +10,8 @@ const SHARED_CONFIG = {
   width: WIDTH,
   height: HEIGHT,
   mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
-  zoomFactor: 1.5
+  zoomFactor: 1.5,
+  debug: true
 }
 
 const Scenes = [
@@ -32,7 +33,7 @@ const config = {
     default: 'arcade',
     arcade: {
       // gravity: { y: 200 },
-      debug: true
+      debug: SHARED_CONFIG.debug
 
     }
   },
