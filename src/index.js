@@ -37,6 +37,9 @@ const config = {
 
     }
   },
+  input: {
+    gamepad: true
+  },
   scene: initScenes()
 };
 

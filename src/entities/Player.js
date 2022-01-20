@@ -17,10 +17,28 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     init() {
+
         this.gravity = 500
         this.speed = 140
 
         this.cursors = this.scene.input.keyboard.createCursorKeys()
+
+        this.pad = null
+        this.buttonDown = false
+
+        this.scene.input.gamepad.once('connected', (pad) => {
+            this.pad = pad
+        })
+
+        // this.scene.input.gamepad.on('down', pad => {
+        //     this.buttonDown = true
+        //     console.log('down')
+        // })
+
+        // this.scene.input.gamepad.on('up', pad => {
+        //     this.buttonDown = false
+        //     console.log('up')
+        // })
 
         this.jumpCount = 0
         this.consecutiveJumps = 1
@@ -47,20 +65,33 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         const { left, right, space } = this.cursors
         const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space)
+        let pad = this.pad
+        
+        if (!pad){
+            pad = {
+                left: false,
+                right: false,
+                A: false
+            }
+        }
 
         const onFloor = this.body.onFloor()
 
-        if (left.isDown) {
+        if (left.isDown || pad.left) {
             this.setVelocityX(-this.speed)
             this.setFlipX(true)
-        } else if (right.isDown) {
+        } else if (right.isDown || pad.right) {
             this.setVelocityX(this.speed)
             this.setFlipX(false)
         } else {
             this.setVelocityX(0)
         }
 
-        if (isSpaceJustDown && (onFloor || this.jumpCount < this.consecutiveJumps)) {
+        // console.log(this.buttonDown)
+
+        if ((isSpaceJustDown || pad.A) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
+            
+            // debugger
             this.setVelocityY(-this.speed * 2)
             this.jumpCount++
             this.play('jump', false)
@@ -108,6 +139,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             hitAnim.stop()
             this.clearTint()
         })
+
+        if (!this.pad){
+            return
+        }
+
+        this.pad.vibration.playEffect('dual-rumble', {
+            startDelay: 0,
+            duration: 1000,
+            weakMagnitude: 0.5,
+            strongMagnitude: 0.5,
+        });
+
+        console.log(this.pad)
 
     }
 
