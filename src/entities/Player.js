@@ -66,8 +66,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         const { left, right, space } = this.cursors
         const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space)
         let pad = this.pad
-        
-        if (!pad){
+
+        if (!pad) {
             pad = {
                 left: false,
                 right: false,
@@ -90,7 +90,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // console.log(this.buttonDown)
 
         if ((isSpaceJustDown || pad.A) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
-            
+
             // debugger
             this.setVelocityY(-this.speed * 2)
             this.jumpCount++
@@ -140,19 +140,23 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.clearTint()
         })
 
-        if (!this.pad){
+        this.padHitVibration(this.pad, 0, 300, 0.4, 0.1)
+
+    }
+
+    padHitVibration(pad, delay = 0, duration = 1000, weakMagnitude = 0.5, strongMagnitude = 0.5) {
+        if (!pad) {
             return
         }
 
-        this.pad.vibration.playEffect('dual-rumble', {
-            startDelay: 0,
-            duration: 1000,
-            weakMagnitude: 0.5,
-            strongMagnitude: 0.5,
+        pad.vibration.playEffect('dual-rumble', {
+            startDelay: delay,
+            duration: duration,
+            weakMagnitude: weakMagnitude,
+            strongMagnitude: strongMagnitude,
         });
 
-        console.log(this.pad)
-
+        console.log(pad)
     }
 
 
