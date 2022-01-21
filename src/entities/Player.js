@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import HealthBar from "../hud/HealthBar"
 import initAnimations from "./anims/PlayerAnims"
 import collidable from "../mixins/collidable"
 
@@ -29,6 +30,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.input.gamepad.once('connected', (pad) => {
             this.pad = pad
         })
+
+        this.health = 100
+
+        this.hp = new HealthBar(this.scene, 0, 0, this.health)
 
         // this.scene.input.gamepad.on('down', pad => {
         //     this.buttonDown = true
