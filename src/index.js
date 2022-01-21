@@ -1,4 +1,4 @@
-import Phaser, { Scale } from "phaser";
+import Phaser from "phaser";
 import PreloadScene from "./scenes/Preload"
 import PlayScene from "./scenes/Play"
 
