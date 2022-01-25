@@ -33,25 +33,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.health = 100
 
-        // this.hp = new HealthBar(
-        //     this.scene, 
-        //     this.scene.config.leftTopCorner.x, 
-        //     this.scene.config.leftTopCorner.y, 
-        //     this.health
-        // )
-
-
-
-        // this.scene.input.gamepad.on('down', pad => {
-        //     this.buttonDown = true
-        //     console.log('down')
-        // })
-
-        // this.scene.input.gamepad.on('up', pad => {
-        //     this.buttonDown = false
-        //     console.log('up')
-        // })
-
         this.jumpCount = 0
         this.consecutiveJumps = 1
         this.hasBeenHit = false
@@ -69,8 +50,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.hp =  new HealthBar(
             this.scene, 
-            this.scene.config.leftTopCorner.x, 
-            this.scene.config.leftTopCorner.y, 
+            110, 
+            60, 
             this.health
         )
     }

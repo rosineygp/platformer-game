@@ -17,7 +17,7 @@ class HealthBar {
         this.pixelPerHealth = this.size.width / this.value
 
         scene.add.existing(this.bar)
-        this.draw(10, 10)
+        this.draw(x, y)
     }
 
     // Bugs at placement position just fix putting it fixed
@@ -34,6 +34,12 @@ class HealthBar {
         //inner bar
         this.bar.fillStyle(0xFFFFFF)
         this.bar.fillRect(x + margin, y + margin, width - margin, height - margin)
+
+        const healthWidth = Math.floor(this.value * this.pixelPerHealth)
+
+        //inner green bar
+        this.bar.fillStyle(0x00FF00)
+        this.bar.fillRect(x + margin, y + margin, healthWidth - margin, height - margin)
     }
 }
 
