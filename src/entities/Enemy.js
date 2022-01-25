@@ -22,6 +22,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.platformsCollidersLayer = null
         this.maxPatrolDistance = 250
         this.currentPatrolDistance = 0
+        this.damage = 20
 
         this.rayGraphics = this.scene.add.graphics({
             lineStyle: {

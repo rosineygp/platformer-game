@@ -20,6 +20,11 @@ class HealthBar {
         this.draw(x, y)
     }
 
+    decrease(amount) {
+        this.value = amount
+        this.draw(110, 60)
+    }
+
     // Bugs at placement position just fix putting it fixed
     // Probably relatated with Phaser.Scale
     draw(x, y) {
@@ -38,8 +43,15 @@ class HealthBar {
         const healthWidth = Math.floor(this.value * this.pixelPerHealth)
 
         //inner green bar
-        this.bar.fillStyle(0x00FF00)
-        this.bar.fillRect(x + margin, y + margin, healthWidth - margin, height - margin)
+        if (healthWidth <= this.size.width / 3) {
+            this.bar.fillStyle(0xFF0000)
+        } else {
+            this.bar.fillStyle(0x00FF00)
+        }
+
+        if (healthWidth > 0)
+            this.bar.fillRect(x + margin, y + margin, healthWidth - margin, height - margin)
+
     }
 }
 
