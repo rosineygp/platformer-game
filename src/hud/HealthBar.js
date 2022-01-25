@@ -17,18 +17,23 @@ class HealthBar {
         this.pixelPerHealth = this.size.width / this.value
 
         scene.add.existing(this.bar)
-        this.draw(x, y)
+        this.draw(10, 10)
     }
 
+    // Bugs at placement position just fix putting it fixed
+    // Probably relatated with Phaser.Scale
     draw(x, y) {
         this.bar.clear()
         const { width, height } = this.size
+        const margin = 2
 
+        //border
         this.bar.fillStyle(0x9B00FF)
+        this.bar.fillRect(x, y, width + 2, height + 2)
 
-        // Bugs at placement position just fix putting it fixed
-        // Probably relatated with Phaser.Scale
-        this.bar.fillRect(200, 100, width, height)
+        //inner bar
+        this.bar.fillStyle(0xFFFFFF)
+        this.bar.fillRect(x + margin, y + margin, width - margin, height - margin)
     }
 }
 
