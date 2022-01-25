@@ -3,6 +3,7 @@ import Phaser from "phaser"
 class HealthBar {
     constructor(scene, x, y, health) {
         this.bar = new Phaser.GameObjects.Graphics(scene)
+        this.bar.setScrollFactor(0, 0)
 
         this.bar.x = x
         this.bar.y = y
@@ -24,7 +25,10 @@ class HealthBar {
         const { width, height } = this.size
 
         this.bar.fillStyle(0x9B00FF)
-        this.bar.fillRect(x, y, width, height)
+
+        // Bugs at placement position just fix putting it fixed
+        // Probably relatated with Phaser.Scale
+        this.bar.fillRect(200, 100, width, height)
     }
 }
 

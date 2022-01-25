@@ -33,7 +33,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.health = 100
 
-        this.hp = new HealthBar(this.scene, 0, 0, this.health)
+        // this.hp = new HealthBar(
+        //     this.scene, 
+        //     this.scene.config.leftTopCorner.x, 
+        //     this.scene.config.leftTopCorner.y, 
+        //     this.health
+        // )
+
+
 
         // this.scene.input.gamepad.on('down', pad => {
         //     this.buttonDown = true
@@ -57,6 +64,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(20, 36)
 
         initAnimations(this.scene.anims)
+
+        this.hp = null
+
+        this.hp =  new HealthBar(
+            this.scene, 
+            this.scene.config.leftTopCorner.x, 
+            this.scene.config.leftTopCorner.y, 
+            this.health
+        )
     }
 
     initEvents() {
