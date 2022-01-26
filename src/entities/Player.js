@@ -2,6 +2,7 @@ import Phaser from "phaser"
 import HealthBar from "../hud/HealthBar"
 import initAnimations from "./anims/PlayerAnims"
 import collidable from "../mixins/collidable"
+import Projectile from "../attacks/Projectile"
 
 class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
@@ -44,17 +45,20 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setSize(20, 36)
 
-        initAnimations(this.scene.anims)
-
-        this.hp = null
-
-        this.hp =  new HealthBar(
+        this.hp = new HealthBar(
             this.scene, 
             200, 
             200,
             2,
             this.health
         )
+
+        initAnimations(this.scene.anims)
+
+        this.scene.input.keyboard.on('keydown-Q', () => {
+            const projectile = new Projectile(this.scene, this.x, this.y, 'iceball')
+            projectile.fire()
+        })
     }
 
     initEvents() {
