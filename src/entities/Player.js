@@ -2,6 +2,7 @@ import Phaser from "phaser"
 import HealthBar from "../hud/HealthBar"
 import initAnimations from "./anims/PlayerAnims"
 import collidable from "../mixins/collidable"
+import Projectiles from "../attacks/Projectiles"
 import Projectile from "../attacks/Projectile"
 
 class Player extends Phaser.Physics.Arcade.Sprite {
@@ -24,6 +25,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.speed = 140
 
         this.cursors = this.scene.input.keyboard.createCursorKeys()
+
+        this.projectiles = new Projectiles(this.scene)
 
         this.pad = null
         this.buttonDown = false
@@ -61,8 +64,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         initAnimations(this.scene.anims)
 
         this.scene.input.keyboard.on('keydown-Q', () => {
-            const projectile = new Projectile(this.scene, this.x, this.y, 'iceball')
-            projectile.fire()
+            this.projectiles.fireProjectile()
         })
     }
 
