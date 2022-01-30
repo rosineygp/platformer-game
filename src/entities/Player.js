@@ -28,6 +28,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.projectiles = new Projectiles(this.scene)
 
+        this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT
+
         this.pad = null
         this.buttonDown = false
 
@@ -94,9 +96,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (left.isDown || pad.left) {
             this.setVelocityX(-this.speed)
             this.setFlipX(true)
+            this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT
         } else if (right.isDown || pad.right) {
             this.setVelocityX(this.speed)
             this.setFlipX(false)
+            this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT
         } else {
             this.setVelocityX(0)
         }
