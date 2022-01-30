@@ -30,6 +30,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.input.gamepad.once('connected', (pad) => {
             this.pad = pad
+            pad.on('up', (x, button, value) => {
+                console.log(x)
+                console.log(button)
+                console.log(value)
+            })
         })
 
         this.health = 100
@@ -46,8 +51,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(20, 36)
 
         this.hp = new HealthBar(
-            this.scene, 
-            200, 
+            this.scene,
+            200,
             200,
             2,
             this.health
@@ -96,7 +101,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         // console.log(this.buttonDown)
 
-        if ((isSpaceJustDown || pad.A) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
+        if (isSpaceJustDown && (onFloor || this.jumpCount < this.consecutiveJumps)) {
 
             // debugger
             this.setVelocityY(-this.speed * 2)
