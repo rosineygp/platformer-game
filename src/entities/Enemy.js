@@ -22,6 +22,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.platformsCollidersLayer = null
         this.maxPatrolDistance = 250
         this.currentPatrolDistance = 0
+
+        this.health = 40
         this.damage = 20
 
         this.rayGraphics = this.scene.add.graphics({
@@ -52,14 +54,14 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     patrol(time) {
 
-        if (!this.body || !this.body.onFloor()){
+        if (!this.body || !this.body.onFloor()) {
             return
         }
 
         this.currentPatrolDistance += Math.abs(this.body.deltaX())
 
-        const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer, { 
-            raylength: 30, 
+        const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer, {
+            raylength: 30,
             precision: 1,
             steepness: 0.2
         })
@@ -80,6 +82,17 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     setPlatformsColliders(platformsCollidersLayer) {
         this.platformsCollidersLayer = platformsCollidersLayer
+    }
+
+    takesHit(source) {
+        this.health -= source.damage
+
+        source.setActive(false)
+            .setVisible(false)
+
+        if (this.health <= 0) {
+            console.log('morri!')
+        }
     }
 
 
