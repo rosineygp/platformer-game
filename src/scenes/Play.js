@@ -1,6 +1,8 @@
 import Player from "../entities/Player"
 import Enemies from "../groups/Enemies"
 
+import initAnims from '../anims'
+
 class Play extends Phaser.Scene {
     constructor(config) {
         super('PlayScene')
@@ -29,6 +31,7 @@ class Play extends Phaser.Scene {
 
         this.createEnfOfLevel(playerZones.end, player)
         this.setupFollowUpCameraOn(player)
+        initAnims(this.anims)
 
     }
 
