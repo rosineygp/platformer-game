@@ -16,6 +16,11 @@ class SpriteEffect extends Phaser.Physics.Arcade.Sprite {
         }, this)
     }
 
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta)
+        this.placeEffect()
+    }
+
     placeEffect() {
         if (!this.target || !this.body)
             return
