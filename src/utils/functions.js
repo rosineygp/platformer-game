@@ -1,4 +1,4 @@
 export const getTimestamp = () => {
-    let date = new Date()
-    return date.getTime()
+  let date = new Date()
+  return date.getTime()
 }

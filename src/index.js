@@ -1,6 +1,6 @@
-import Phaser from "phaser";
-import PreloadScene from "./scenes/Preload"
-import PlayScene from "./scenes/Play"
+import Phaser from 'phaser'
+import PreloadScene from './scenes/Preload'
+import PlayScene from './scenes/Play'
 
 const MAP_WIDTH = 1600
 const WIDTH = 1200
@@ -14,19 +14,16 @@ const SHARED_CONFIG = {
   zoomFactor: ZOOM_FACTOR,
   debug: true,
   leftTopCorner: {
-    x: (WIDTH - (WIDTH / ZOOM_FACTOR)) / 2,
-    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
+    x: (WIDTH - WIDTH / ZOOM_FACTOR) / 2,
+    y: (HEIGHT - HEIGHT / ZOOM_FACTOR) / 2,
   },
   rightTopCorner: {
-    x : ((WIDTH / ZOOM_FACTOR) + (HEIGHT - (HEIGHT / ZOOM_FACTOR))) / 2,
-    y: (HEIGHT - (HEIGHT / ZOOM_FACTOR)) / 2
-  }
+    x: (WIDTH / ZOOM_FACTOR + (HEIGHT - HEIGHT / ZOOM_FACTOR)) / 2,
+    y: (HEIGHT - HEIGHT / ZOOM_FACTOR) / 2,
+  },
 }
 
-const Scenes = [
-  PreloadScene,
-  PlayScene
-]
+const Scenes = [PreloadScene, PlayScene]
 
 const initScenes = () => Scenes.map((Scene) => new Scene(SHARED_CONFIG))
 
@@ -36,20 +33,19 @@ const config = {
   pixelArt: true,
   scale: {
     mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
+    autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   physics: {
     default: 'arcade',
     arcade: {
       // gravity: { y: 200 },
-      debug: SHARED_CONFIG.debug
-
-    }
+      debug: SHARED_CONFIG.debug,
+    },
   },
   input: {
-    gamepad: true
+    gamepad: true,
   },
-  scene: initScenes()
-};
+  scene: initScenes(),
+}
 
-new Phaser.Game(config);
+new Phaser.Game(config)

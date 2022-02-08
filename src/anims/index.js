@@ -1,8 +1,8 @@
-export default anims => {
-    anims.create({
-        key: 'hit-effect',
-        frames: anims.generateFrameNames('hit-sheet', {start: 0, end: 4}),
-        frameRate: 10,
-        repeat: 0
-    })
+export default (anims) => {
+  anims.create({
+    key: 'hit-effect',
+    frames: anims.generateFrameNames('hit-sheet', { start: 0, end: 4 }),
+    frameRate: 10,
+    repeat: 0,
+  })
 }
