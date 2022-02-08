@@ -8,7 +8,8 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.common.js --watch",
     "prepare": "husky install",
-    "pretty": "prettier --write --single-quote --trailing-comma all --no-semi \"./**/*.{js,jsx,json}\""
+    "pretty": "prettier --write --single-quote --trailing-comma all --no-semi \"./**/*.{js,jsx,json}\"",
+    "pretty-check": "prettier --check --single-quote --trailing-comma all --no-semi \"./**/*.{js,jsx,json}\""
   },
   "author": "",
   "license": "ISC",
