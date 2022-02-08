@@ -97,7 +97,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     source.deliversHit(this)
 
     if (this.health <= 0) {
-      console.log('morri!')
+      this.setTint(0xff0000).setVelocity(0, -200).setCollideWorldBounds(false)
+      this.body.checkCollision.none = true
     }
   }
 }
