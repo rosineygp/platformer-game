@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",
-    "dev": "webpack-dev-server --config webpack.common.js --watch"
+    "dev": "webpack-dev-server --config webpack.common.js --watch",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.1.1",
     "html-webpack-plugin": "^4.4.1",
+    "husky": "^7.0.4",
     "terser-webpack-plugin": "^4.2.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
