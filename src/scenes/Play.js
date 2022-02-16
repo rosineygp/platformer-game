@@ -127,6 +127,7 @@ class Play extends Phaser.Scene {
       .addCollider(colliders.platformsColliders)
       .addCollider(colliders.player, this.onPlayerCollision)
       .addCollider(colliders.player.projectiles, this.onWeaponHit)
+      .addOverlap(colliders.player.meleeWeapon, this.onWeaponHit)
   }
 
   setupFollowUpCameraOn(player) {
