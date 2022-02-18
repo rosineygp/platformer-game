@@ -5,6 +5,7 @@ import anims from '../mixins/anims'
 import collidable from '../mixins/collidable'
 import Projectiles from '../attacks/Projectiles'
 import MeleeWeapon from '../attacks/MeleeWeapon'
+import { getTimestamp } from '../utils/functions'
 
 class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
@@ -50,6 +51,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.consecutiveJumps = 1
     this.hasBeenHit = false
     this.bounceVelocity = 250
+    this.timeFromLastSwing = -1
 
     this.body.setGravityY(500)
     this.setCollideWorldBounds(true)
@@ -67,10 +69,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     })
 
     this.scene.input.keyboard.on('keydown-E', () => {
-      // this.projectiles.fireProjectile(this)
+      if (
+        this.timeFromLastSwing + this.meleeWeapon.attackSpeed >
+        getTimestamp()
+      ) {
+        return
+      }
+
       this.play('throw', true)
       this.meleeWeapon.swing(this)
-      console.log('melee attack!!!')
+
+      this.timeFromLastSwing = getTimestamp()
     })
   }
 
