@@ -40,8 +40,6 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setOrigin(0.5, 1)
 
     this.setImmovable(true)
-    this.setSize(20, 45)
-    this.setOffset(7, 20)
 
     this.setVelocityX(this.speed)
   }
