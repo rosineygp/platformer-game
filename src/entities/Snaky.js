@@ -15,6 +15,7 @@ class Snaky extends Enemy {
     this.projectiles = new Projectiles(this.scene, 'fireball-1')
     this.timeFromLastAttack = 0
     this.attackDelay = this.getAttackDelay()
+    this.lastDirection = null
 
     this.setSize(12, 45)
     this.setOffset(10, 15)
@@ -22,6 +23,12 @@ class Snaky extends Enemy {
 
   update(time, delta) {
     super.update(time, delta)
+
+    if (this.body.velocity.x > 0) {
+      this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT
+    } else {
+      this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT
+    }
 
     if (this.timeFromLastAttack + this.attackDelay <= time) {
       this.projectiles.fireProjectile(this)
