@@ -28,7 +28,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.cursors = this.scene.input.keyboard.createCursorKeys()
 
-    this.projectiles = new Projectiles(this.scene)
+    this.projectiles = new Projectiles(this.scene, 'iceball')
     this.meleeWeapon = new MeleeWeapon(this.scene, 0, 0, 'sword-default')
 
     this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT
